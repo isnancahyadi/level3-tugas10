@@ -16,29 +16,30 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Nama Produk</th>
+                <th scope="col">Keterangan</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            <?php foreach ($produk as $key => $value) : ?>
+                <tr>
+                    <th><?= $key + 1 ?></th>
+                    <th><?= $value->nama_produk ?></th>
+                    <th><?= $value->keterangan ?></th>
+                    <th><?= $value->harga ?></th>
+                    <th><?= $value->jumlah ?></th>
+                    <th class="text-center" style="width: 15%">
+                        <a href="<?= site_url('produk/' . $value->id_produk . '/edit') ?>" class="btn btn-warning btn-sm">edit</i></a>
+                        <form action="<?= site_url('produk/' . $value->id_produk) ?>" method="POST" class="d-inline">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger btn-sm">delete</button>
+                        </form>
+                    </th>
+                </tr>
+            <?php endforeach ?>
         </tbody>
     </table>
 

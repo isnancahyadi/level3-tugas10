@@ -19,7 +19,8 @@ class Produk extends ResourceController
      */
     public function index()
     {
-        return view('index');
+        $data['produk'] = $this->produk->findAll();
+        return view('index', $data);
     }
 
     /**
@@ -63,7 +64,10 @@ class Produk extends ResourceController
      */
     public function edit($id = null)
     {
-        //
+        $data['produk'] = $this->produk->find($id);
+        return view('editProduk', $data);
+
+        // return $this->respond($data);
     }
 
     /**
@@ -73,7 +77,11 @@ class Produk extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $data = $this->request->getPost();
+
+        $this->produk->update($id, $data);
+
+        return $this->respondUpdated('Data berhasil diupdate');
     }
 
     /**
@@ -83,6 +91,7 @@ class Produk extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $this->produk->delete($id);
+        return redirect()->to(site_url('produk'));
     }
 }
